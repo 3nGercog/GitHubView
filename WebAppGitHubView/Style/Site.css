@@ -1,0 +1,116 @@
+﻿#default_buttonSubmit {
+    width: 50%;
+}
+div.listVoid {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    width: 100%;
+    height: 40px;
+}
+ul.commit {
+    margin:auto;
+}
+#default_htmlImg {
+    width: 100%;
+    height: 100%;
+}
+#default_tableRepos{
+
+    width: 80%;
+    height: 400%;
+}
+
+td.cellRepository {
+    width: 30%;
+    height:auto;
+    border: 2px solid #000000;
+    margin: 10px 10px 10px 10px;
+    cursor: pointer!important;
+}
+
+td.cellRepository:hover{
+    border-color: chocolate;
+}
+
+table.tableCellRepository {
+    width: 100%;
+}
+html {
+    background-color: lemonchiffon;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    border-top: solid 10px chocolate;
+    color: #333;
+    font-size: .85em;
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    margin: 0;
+    padding: 0;
+}
+
+div.staticData {
+
+}
+div.dynamicData {
+
+}
+
+ol.login {
+    list-style-type: none;
+}
+ol.login li {
+    text-align:left;
+}
+span.user {
+    color:royalblue;
+}
+
+div.image{
+    margin:auto;
+    float:inherit;
+    width: 6%;
+    height: 6%;
+}
+
+table{
+    margin:auto;
+    display: compact;
+}
+
+.listButton {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    text-align: center;
+    padding: 5px;
+    margin: 5px;
+    width: 100%;
+    float: left;
+}
+ul.bt {
+    list-style-type:none;
+    margin: 0px;
+    padding: 4px;
+}
+
+ul.bt li {
+    display: inline;
+    margin-right: 5px;
+}
+input.list_button_inline {
+    width: 15%;
+    height: 5%;
+    color:white;
+    background-color: #FF7F24;
+}
+div.list_text {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    text-transform: lowercase;
+    color: #FAF0E6;
+    text-align: center;
+}
+#tb_url {
+    background-color: #FAF0E6;
+    width: 70%;
+    height: 10%;
+    color:blue;
+}

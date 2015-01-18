@@ -5,9 +5,6 @@
 <asp:Content ID="Content4" 
   ContentPlaceHolderID="default" Runat="Server">
     <div id="commitInfo" runat="server">
-        <h1 id="h1" style="text-align:center; color:blue" runat="server"></h1>
-<%--        <asp:BulletedList ID="BulletedList1" BorderStyle="Dashed" BorderColor="Window" runat="server">
-            <asp:ListItem Text="text" Selected="True" />
-        </asp:BulletedList>--%>
+        <h1 id="h1" style="text-align:center; color:peru" runat="server"></h1>
     </div>
 </asp:Content>

@@ -24,7 +24,8 @@ namespace WebAppGitHubView
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ScriptManager.ScriptResourceMapping.AddDefinition("jquery", new ScriptResourceDefinition {
+            ScriptManager.ScriptResourceMapping.AddDefinition("jquery", new ScriptResourceDefinition
+            {
                 Path = "~/scripts/jquery-1.8.2.min.js"
             });
             if (IsPostBack)
@@ -59,77 +60,89 @@ namespace WebAppGitHubView
 
         protected async void text_Click(object sender, EventArgs e)
         {
-
             if (status == IPStatus.Success && !String.IsNullOrEmpty(nameUser) && !String.IsNullOrEmpty(passwordUser))
             {
-                github = new GitHubClient(new ProductHeaderValue("test")) { Credentials = new Credentials(nameUser, passwordUser) };
-                Session["GitHub"] = github;
-                var user = await github.User.Get(nameUser);
-
-                var repositorys = await github.Repository.GetAllForCurrent();
-
-                htmlImg.Visible = true;
-                htmlImg.ImageUrl = user.AvatarUrl;
-                var repositorysCount = repositorys.Count;
-                tableRepos.Visible = true;
-                tableRepos.ViewStateMode = System.Web.UI.ViewStateMode.Enabled;
-                Page.Title = "Repository Page";
-
-                int countRow = (repositorysCount % 2 == 0) ? repositorysCount / 2 : repositorysCount / 2 + 1;
-                int endCell = (repositorysCount % 2 == 0) ? 2 : 1;
-                TableRow row; TableCell cell;  DataTable dt;
-                int cellCount = 0;
-                for (int i = 0; i < countRow; i++)
+                try
                 {
-                    row = new TableRow();
-                    row.ID = "rowRepos" + i;
-                    for (int k = 0; k < 2; k++)
+                    github = new GitHubClient(new ProductHeaderValue("test")) { Credentials = new Credentials(nameUser, passwordUser) };
+                    Session["GitHub"] = github;
+                    var user = await github.User.Get(nameUser);
+
+                    var repositorys = await github.Repository.GetAllForCurrent();
+
+                    htmlImg.Visible = true;
+                    htmlImg.ImageUrl = user.AvatarUrl;
+                    var repositorysCount = repositorys.Count;
+                    tableRepos.Visible = true;
+                    tableRepos.ViewStateMode = System.Web.UI.ViewStateMode.Enabled;
+                    Page.Title = "Repository Page";
+
+                    int countRow = (repositorysCount % 2 == 0) ? repositorysCount / 2 : repositorysCount / 2 + 1;
+                    int endCell = (repositorysCount % 2 == 0) ? 2 : 1;
+                    TableRow row; TableCell cell; DataTable dt;
+                    int cellCount = 0;
+                    for (int i = 0; i < countRow; i++)
                     {
-                        cell = new TableCell();
-                        cell.ID = "cellRepos" + cellCount;
-
-                        grid = new GridView();
-                        grid.ID = "GridView" + cellCount;
-                        grid.Attributes.Add("class", "tableCellRepository");
-                        grid.Attributes.Add("onclick", "cell_Click(this)");
-                        
-                        GetInfoRepositorys(repositorys, cellCount++);
-
-                        cell.Attributes.Add("class", "cellRepository");
-                        //cell.Attributes.Add("onclick", "cell_Click(this)");
-                        dt = new DataTable();
-                        DataColumn col1 = new DataColumn("First", typeof(string));
-                        DataColumn col2 = new DataColumn("Second", typeof(string));
-                        dt.Columns.Add(col1);
-                        dt.Columns.Add(col2);
-                        DataRow dRow = null;
-
-                        for (int first = 0; first < info.FirstColum.Length; first++)
+                        row = new TableRow();
+                        row.ID = "rowRepos" + i;
+                        for (int k = 0; k < 2; k++)
                         {
-                            if(first == 0)
-                            {//repository = info.SecondColum[first];
+                            cell = new TableCell();
+                            cell.ID = "cellRepos" + cellCount;
+
+                            grid = new GridView();
+                            grid.ID = "GridView" + cellCount;
+                            grid.Attributes.Add("class", "tableCellRepository");
+                            grid.Attributes.Add("onclick", "cell_Click(this)");
+
+                            GetInfoRepositorys(repositorys, cellCount++);
+
+                            cell.Attributes.Add("class", "cellRepository");
+                            //cell.Attributes.Add("onclick", "cell_Click(this)");
+                            dt = new DataTable();
+                            DataColumn col1 = new DataColumn("First", typeof(string));
+                            DataColumn col2 = new DataColumn("Second", typeof(string));
+                            dt.Columns.Add(col1);
+                            dt.Columns.Add(col2);
+                            DataRow dRow = null;
+
+                            for (int first = 0; first < info.FirstColum.Length; first++)
+                            {
+                                if (first == 0)
+                                {//repository = info.SecondColum[first];
+                                }
+                                dRow = dt.NewRow();
+                                dRow["First"] = info.FirstColum[first];
+                                dRow["Second"] = info.SecondColum[first];
+                                dt.Rows.Add(dRow);
                             }
-                            dRow = dt.NewRow();
-                            dRow["First"] = info.FirstColum[first];
-                            dRow["Second"] = info.SecondColum[first];
-                            dt.Rows.Add(dRow);
+
+
+                            grid.RowDataBound += grid_RowDataBound;
+                            grid.DataSource = dt;
+                            grid.DataBind();
+                            grid.AutoGenerateColumns = true;
+
+                            cell.Controls.Add(grid);
+
+                            if (endCell == 1 && i == countRow - 1 && k == 1)
+                                break;
+                            row.Cells.Add(cell);
                         }
-
-
-                        grid.RowDataBound += grid_RowDataBound;
-                        grid.DataSource = dt;
-                        grid.DataBind();
-                        grid.AutoGenerateColumns = true;
-
-                        cell.Controls.Add(grid);
-
-                        if (endCell == 1 && i == countRow - 1 && k == 1)
-                            break;
-                        row.Cells.Add(cell);
+                        tableRepos.Rows.Add(row);
                     }
-                    tableRepos.Rows.Add(row);
-                }              
+                }
+                catch (Exception ex)
+                {
+
+                    Response.Write(ex.Message);
+                }
+              
             }
+            else if (String.IsNullOrEmpty(nameUser))
+                Response.Write("НЕТ такого юзера!");
+            else if (String.IsNullOrEmpty(passwordUser))
+                Response.Write("Пароль не верен!");
             else
                 Response.Write("НЕТ подключения к интернету!");
         }
