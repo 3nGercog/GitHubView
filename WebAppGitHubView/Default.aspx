@@ -13,12 +13,12 @@
                 <li>
                     <asp:Label CssClass="user" Text="Login" runat="server" /><br />
                     <input type="text" runat="server" id="text" name="" style="width: 30%;" />
-                    <asp:RequiredFieldValidator ID="regText" ErrorMessage="Поле login обязательное для заполнения" ControlToValidate="text" runat="server" />
+                    <asp:RequiredFieldValidator CssClass="validation" ID="regText" ErrorMessage="Поле login обязательное для заполнения" ControlToValidate="text" runat="server" />
                 </li>
                 <li>
                     <asp:Label CssClass="user" Text="Password" runat="server" />
                     <br /><input type="password" runat="server" id="password" name="" style="width: 30%" />
-                    <asp:RequiredFieldValidator ID="regPassword" ErrorMessage="Поле password обязательное для заполнения" ControlToValidate="password" runat="server" />
+                    <asp:RequiredFieldValidator CssClass="validation" ID="regPassword" ErrorMessage="Поле password обязательное для заполнения" ControlToValidate="password" runat="server" />
                 </li>
             </ol>
             <asp:Button ID="buttonSubmit" runat="server" Text="Submit"

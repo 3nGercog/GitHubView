@@ -34,6 +34,14 @@ td.cellRepository:hover{
 table.tableCellRepository {
     width: 100%;
 }
+
+tr.rowRepository {
+    border: groove;
+}
+tr.rowRepository:hover {
+    border-color: chocolate;
+}
+
 html {
     background-color: lemonchiffon;
     margin: 0;
@@ -64,6 +72,9 @@ ol.login li {
 }
 span.user {
     color:royalblue;
+}
+span.validation {
+    color:red;
 }
 
 div.image{
@@ -118,16 +129,7 @@ div.list_text {
     text-align:left;
     width: 80%;
 }
-#regText{
-    color:red;
-}
-#regPassword {
-    color:red
-}
 
-#regUrl {
-    color:red;
-}
 div.list_table_urls {
     font-family: Georgia, "Times New Roman", Times, serif;
     text-align:center;

@@ -49,6 +49,15 @@ namespace WebAppGitHubView {
         protected global::System.Web.UI.HtmlControls.HtmlInputText tb_url;
         
         /// <summary>
+        /// message элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label message;
+        
+        /// <summary>
         /// regUrl элемент управления.
         /// </summary>
         /// <remarks>
@@ -74,5 +83,14 @@ namespace WebAppGitHubView {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridViewUrl;
+        
+        /// <summary>
+        /// hdField элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdField;
     }
 }
