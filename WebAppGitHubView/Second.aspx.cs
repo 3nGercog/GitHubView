@@ -18,7 +18,7 @@ namespace WebAppGitHubView
                 
                 string repository = Request.QueryString["name"];
                 string user = Request.QueryString["user"];
-                Page.Title = "Commit Info!!!";
+                Page.Title = "Commit Info";
                 //Response.Write("name repository  - " + repository + "  owner - " + user);
                 GetInfo(user, repository);
             }

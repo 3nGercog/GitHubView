@@ -114,3 +114,21 @@ div.list_text {
     height: 10%;
     color:blue;
 }
+#GridViewUrl {
+    text-align:left;
+    width: 80%;
+}
+#regText{
+    color:red;
+}
+#regPassword {
+    color:red
+}
+
+#regUrl {
+    color:red;
+}
+div.list_table_urls {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    text-align:center;
+}

@@ -22,6 +22,15 @@ namespace WebAppGitHubView {
         protected global::System.Web.UI.HtmlControls.HtmlInputText text;
         
         /// <summary>
+        /// regText элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator regText;
+        
+        /// <summary>
         /// password элемент управления.
         /// </summary>
         /// <remarks>
@@ -29,6 +38,15 @@ namespace WebAppGitHubView {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputPassword password;
+        
+        /// <summary>
+        /// regPassword элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator regPassword;
         
         /// <summary>
         /// buttonSubmit элемент управления.

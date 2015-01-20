@@ -19,7 +19,7 @@ namespace WebAppGitHubView {
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputButton btAdd;
+        protected global::System.Web.UI.WebControls.Button btAdd;
         
         /// <summary>
         /// btRemove элемент управления.
@@ -28,7 +28,7 @@ namespace WebAppGitHubView {
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputButton btRemove;
+        protected global::System.Web.UI.WebControls.Button btRemove;
         
         /// <summary>
         /// btEdit элемент управления.
@@ -37,7 +37,7 @@ namespace WebAppGitHubView {
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputButton btEdit;
+        protected global::System.Web.UI.WebControls.Button btEdit;
         
         /// <summary>
         /// tb_url элемент управления.
@@ -47,5 +47,32 @@ namespace WebAppGitHubView {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText tb_url;
+        
+        /// <summary>
+        /// regUrl элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator regUrl;
+        
+        /// <summary>
+        /// SqlDataSourceUrl элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceUrl;
+        
+        /// <summary>
+        /// GridViewUrl элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridViewUrl;
     }
 }
