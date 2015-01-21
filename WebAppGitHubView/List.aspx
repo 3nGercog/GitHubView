@@ -1,7 +1,9 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/GitHubViewSite.Master" CodeBehind="List.aspx.cs" ClientIDMode="Static" Inherits="WebAppGitHubView.List" %>
 
 <asp:Content ID="ContentListHead" runat="server" ContentPlaceHolderID="head">
+    <script src="Scripts/uri.js"></script>
 </asp:Content>
+
 <asp:Content ID="ContentListBody" ContentPlaceHolderID="default" runat="server" >
     <div class="listVoid">
     </div>
@@ -19,39 +21,49 @@
                 <%--<input id="btEdit" class="list_button_inline" type="button" runat="server" value="EDIT" />--%>
                 <asp:Button ID="btEdit" CssClass="list_button_inline" Text="EDIT" runat="server" OnClick="btEdit_Click" />
             </li>
+            <li>
+                <input id="btHelp" class="list_button_inline" type="button" runat="server" value="HELP" onclick="help_Click()" />
+                <%--<asp:Button ID="btHelp" CssClass="list_button_inline" Text="HELP" runat="server" OnClick="btHelp_Click"/>--%>
+            </li>
         </ul>
     </div>
     <div class="list_text">
         <input type="text" id="tb_url" runat="server" />
         <br />
-        <asp:Label ID="message" CssClass="validation" Text="" runat="server" />
+        <asp:Label ID="message" CssClass="validation_error" Text="" runat="server" />
         <br />
         <asp:RegularExpressionValidator CssClass="validation" ID="regUrl" ErrorMessage="This expression does not validate."
              ControlToValidate="tb_url" ValidationExpression="^(ht|f)tp(s?)\:\/\/[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*(:(0-9)*)*(\/?)([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%\$#_]*)?$" runat="server" />
     </div>
     <div class="listVoid"></div>
     <script type="text/javascript">
+
+        function help_Click() {
+            document.location.href = "Help.aspx";
+        }
         function cell_list_Click(th) {
-            //var tr = th.ParentNode,
             var id = th.getElementsByTagName("td")[0].innerHTML;
             var url = th.getElementsByTagName("td")[1].innerHTML;
             
             var textB = document.getElementById("tb_url");
-            var btR = document.getElementById("btRemove");
-            var btE = document.getElementById("btEdit");
             var hdF = document.getElementById("hdField").valueOf();
             hdF.value = id;
+            var parser = document.createElement('a');
+            //alert(id + "\n" + url);
+            parser.href = url;
 
-            //alert(id + "\n" + url + "\nhdf val = " + hdf.value);
+            <%--<% HttpUtility.JavaScriptStringEncode(url); %>
+            var encode = encodeURIComponent(url);
+            alert(encode);
+            var decode = decodeURIComponent(encode);
+            alert(decode);--%>
 
             if (textB.disabled) {
-                document.location.href = "Show.aspx";
+                document.location.href = "Show.aspx" + "?pn=" + parser.pathname;
             }
-            //else {
-            //    btR.disabled = false;
-            //    btE.disabled = false;
-            //    textB.value = url;
-            //}
+            else {
+                textB.value = url;
+            }
         }
         
 

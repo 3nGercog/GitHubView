@@ -15,7 +15,6 @@ namespace WebAppGitHubView
         {
             if (!IsPostBack)
             {
-                
                 string repository = Request.QueryString["name"];
                 string user = Request.QueryString["user"];
                 Page.Title = "Commit Info";
@@ -44,7 +43,6 @@ namespace WebAppGitHubView
             {
                 labelBranch = new System.Web.UI.WebControls.Label();
                 labelBranch.ID = "labelBranch" + countBranch++;
-                labelBranch.BorderColor = System.Drawing.Color.Blue;
                 
                 labelBranch.Text = "<h2>" + item.Name + " branch" + "</h2>";
 

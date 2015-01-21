@@ -1,0 +1,28 @@
+﻿div#container {
+
+}
+div.repository {
+        width: 23%;
+        border: 1px solid #333;
+        border-radius: 5px;
+        padding: 5px 5px;
+        margin: 6px;
+        display: inline-block;
+        color: chocolate;
+        text-shadow: 1px 1px 1px #FF7F24;
+}
+div.branch {
+        border: 1px solid #666;
+        border-radius: 5px;
+        padding: 5px 5px;
+        margin-bottom: 5px;
+}
+div.commit {
+        border: 1px solid #999;
+        border-radius: 5px;
+        color: black;
+}
+/*div {
+    border: 1px solid #666;
+    padding: 5px 0;
+}*/
