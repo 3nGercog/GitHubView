@@ -134,8 +134,8 @@ namespace WebAppGitHubView
                 }
                 catch (Exception ex)
                 {
-
-                    Response.Write(ex.Message);
+                    Response.Write(ex.Message + ". Если по каким то причинам не помните свой пароль" +
+                        " можно посмотреть все репозитории в <a href=\"localhost/githubview/List.aspx\">списке.</a>списке");
                 }
               
             }

@@ -10,15 +10,6 @@
 namespace WebAppGitHubView {
     
     
-    public partial class Show {
-        
-        /// <summary>
-        /// container элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl container;
+    public partial class Help {
     }
 }

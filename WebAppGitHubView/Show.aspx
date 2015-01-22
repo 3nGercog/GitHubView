@@ -9,9 +9,4 @@
         <%--<asp:Button ID="bt_back" CssClass="list_button_inline"  runat="server" Text="BACK" OnClick="bt_back_Click"/>--%>
          <br />
     </div>
-    <script type="text/javascript">
-        function bt_back_Click() {
-            document.location.href = "List.aspx";
-        }
-    </script>
 </asp:Content>

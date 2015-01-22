@@ -13,6 +13,15 @@ namespace WebAppGitHubView {
     public partial class List {
         
         /// <summary>
+        /// btActivation элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btActivation;
+        
+        /// <summary>
         /// btAdd элемент управления.
         /// </summary>
         /// <remarks>
@@ -38,6 +47,15 @@ namespace WebAppGitHubView {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btEdit;
+        
+        /// <summary>
+        /// btHelp элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputButton btHelp;
         
         /// <summary>
         /// tb_url элемент управления.

@@ -1,7 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/GitHubViewSite.Master" CodeBehind="List.aspx.cs" ClientIDMode="Static" Inherits="WebAppGitHubView.List" %>
 
 <asp:Content ID="ContentListHead" runat="server" ContentPlaceHolderID="head">
-    <script src="Scripts/uri.js"></script>
 </asp:Content>
 
 <asp:Content ID="ContentListBody" ContentPlaceHolderID="default" runat="server" >
@@ -9,6 +8,9 @@
     </div>
     <div class="listButton">
         <ul class="bt">
+            <li>
+                <asp:Button ID="btActivation" CssClass="list_button_inline" Text="ACTIVATION" runat="server" OnClick="btActivation_Click" />
+            </li>
             <li>
                 <%--<input id="btAdd" class="list_button_inline" type="button" runat="server" value="ADD" onclick="btAdd_Click"/>--%>
                 <asp:Button ID="btAdd" CssClass="list_button_inline" Text="ADD" runat="server" OnClick="btAdd_Click" />
@@ -36,38 +38,7 @@
              ControlToValidate="tb_url" ValidationExpression="^(ht|f)tp(s?)\:\/\/[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*(:(0-9)*)*(\/?)([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%\$#_]*)?$" runat="server" />
     </div>
     <div class="listVoid"></div>
-    <script type="text/javascript">
 
-        function help_Click() {
-            document.location.href = "Help.aspx";
-        }
-        function cell_list_Click(th) {
-            var id = th.getElementsByTagName("td")[0].innerHTML;
-            var url = th.getElementsByTagName("td")[1].innerHTML;
-            
-            var textB = document.getElementById("tb_url");
-            var hdF = document.getElementById("hdField").valueOf();
-            hdF.value = id;
-            var parser = document.createElement('a');
-            //alert(id + "\n" + url);
-            parser.href = url;
-
-            <%--<% HttpUtility.JavaScriptStringEncode(url); %>
-            var encode = encodeURIComponent(url);
-            alert(encode);
-            var decode = decodeURIComponent(encode);
-            alert(decode);--%>
-
-            if (textB.disabled) {
-                document.location.href = "Show.aspx" + "?pn=" + parser.pathname;
-            }
-            else {
-                textB.value = url;
-            }
-        }
-        
-
-    </script>
     <div class="list_table_urls">
         <asp:SqlDataSource ID="SqlDataSourceUrl" runat="server" ></asp:SqlDataSource>
         <asp:GridView ID="GridViewUrl" runat="server" AutoGenerateColumns="False" BackColor="#DEBA84" BorderColor="#DEBA84" BorderStyle="None" BorderWidth="1px" CellPadding="6" CellSpacing="2" DataKeyNames="Id">

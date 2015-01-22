@@ -9,6 +9,7 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <link href="Style/Site.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="Scripts/myScripts.js"></script>
 </head>
 <body>
     <form runat="server"> 

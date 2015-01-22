@@ -21,9 +21,14 @@ namespace WebAppGitHubView
         {
             dhuc = new GitHubUrlContext();
             SelectedGridView(dhuc);
-            this.tb_url.Value = String.Empty;
+            
             message.Text = String.Empty;
-            tb_url.Disabled = true;
+            if (!IsPostBack)
+            {
+                this.tb_url.Value = String.Empty;
+                tb_url.Disabled = true;
+            }
+            
         }
 
         void GridViewUrl_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -61,6 +66,13 @@ namespace WebAppGitHubView
             }
         }
 
+        private void DisabledTexBox()
+        {
+            tb_url.Value = String.Empty;
+            tb_url.Disabled = true;
+            this.btActivation.Text = "ACTIVATION";
+        }
+
         protected void btAdd_Click(object sender, EventArgs e)
         {
             if (!this.tb_url.Disabled)
@@ -68,44 +80,52 @@ namespace WebAppGitHubView
                 Ping p = new Ping();
                 PingReply pr = p.Send(@"github.com");
                 status = pr.Status;
-                reg = new Regex(pattern); 
-            }
+                reg = new Regex(pattern);
 
-            tb_url.Disabled = false;
-            
-            if (status == IPStatus.Success && tb_url.Value.Length > 0 && 
-                reg.Match(tb_url.Value, 0).Value == "github.com")
-            {
                 try
                 {
-                    dhuc = new GitHubUrlContext();
-                    using (SqlConnection conn = new SqlConnection(dhuc.Database.Connection.ConnectionString))
+                    if (status == IPStatus.Success && tb_url.Value.Length > 0 &&
+                    reg.Match(tb_url.Value, 0).Value == "github.com")
                     {
-                        string query = String.Format("INSERT INTO [URLS] VALUES ('{0}')", tb_url.Value);
-                        SqlCommand com = new SqlCommand(query, conn);
-                        conn.Open();
-                        if (com.ExecuteNonQuery() == 1)
+                        try
                         {
-                            SelectedGridView(dhuc);
-                            tb_url.Value = string.Empty;
-                            tb_url.Disabled = true;
-                            message.CssClass = "validation_success";
-                            message.Text = "add url github.com";
-                            
+                            dhuc = new GitHubUrlContext();
+                            using (SqlConnection conn = new SqlConnection(dhuc.Database.Connection.ConnectionString))
+                            {
+                                string query = String.Format("INSERT INTO [URLS] VALUES ('{0}')", tb_url.Value);
+                                SqlCommand com = new SqlCommand(query, conn);
+                                conn.Open();
+                                if (com.ExecuteNonQuery() == 1)
+                                {
+                                    SelectedGridView(dhuc);
+                                    DisabledTexBox();
+                                    message.CssClass = "validation_success";
+                                    message.Text = "add url github.com";
+
+                                }
+                            }
                         }
+                        catch (Exception ex)
+                        {
+                            DisabledTexBox();
+                            message.CssClass = "validation_error";
+                            message.Text = ex.Message;
+                        }
+
                     }
                 }
-                catch (Exception ex)
+                catch (Exception expt)
                 {
+                    DisabledTexBox();
                     message.CssClass = "validation_error";
-                    message.Text = ex.Message;
+                    message.Text = expt.Message;
                 }
-
             }
-            if (tb_url.Disabled)
+            else
             {
+                DisabledTexBox();
                 message.CssClass = "validation_error";
-                message.Text = "no github.com";
+                message.Text = "tex box disabled";
             }
         }
 
@@ -124,8 +144,7 @@ namespace WebAppGitHubView
                         if (com.ExecuteNonQuery() == 1)
                         {
                             SelectedGridView(dhuc);
-                            tb_url.Value = String.Empty;
-                            tb_url.Disabled = true;
+                            DisabledTexBox();
                             message.CssClass = "validation_success";
                             message.Text = "removed url";
 
@@ -134,12 +153,14 @@ namespace WebAppGitHubView
                 }
                 catch (Exception ex)
                 {
+                    DisabledTexBox();
                     message.CssClass = "validation_error";
                     message.Text = ex.Message;
                 }
             }
             else
             {
+                DisabledTexBox();
                 message.CssClass = "validation_error";
                 message.Text = "tex box disabled";
             }
@@ -160,8 +181,7 @@ namespace WebAppGitHubView
                         if (com.ExecuteNonQuery() == 1)
                         {
                             SelectedGridView(dhuc);
-                            tb_url.Value = String.Empty;
-                            tb_url.Disabled = true;
+                            DisabledTexBox();
                             message.CssClass = "validation_success";
                             message.Text = "edit url";
                         }
@@ -169,12 +189,14 @@ namespace WebAppGitHubView
                 }
                 catch (Exception ex)
                 {
+                    DisabledTexBox();
                     message.CssClass = "validation_error";
                     message.Text = ex.Message;
                 }
             }
             else
             {
+                DisabledTexBox();
                 message.CssClass = "validation_error";
                 message.Text = "tex box disabled";
             }
@@ -182,6 +204,21 @@ namespace WebAppGitHubView
 
         protected void btHelp_Click(object sender, EventArgs e)
         {
+
+        }
+
+        protected void btActivation_Click(object sender, EventArgs e)
+        {
+            if (this.tb_url.Disabled)
+            {
+                this.tb_url.Disabled = false;
+                this.btActivation.Text = "DISABLED";
+            }
+            else
+            {
+                this.tb_url.Disabled = true;
+                this.btActivation.Text = "ACTIVATION";
+            }
 
         }
     }

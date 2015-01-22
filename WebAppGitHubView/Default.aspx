@@ -30,16 +30,6 @@
         </div>
     </div>
 
-    <script type="text/javascript">
-        function cell_Click(th) {
-            var x = th.id;
-            var tr = th.parentNode.parentNode,
-                nameRep = tr.getElementsByTagName("td")[1].innerHTML;
-            var user = document.getElementById("default_text").value;
-            //alert(x + "\n" + nameRep + "\n" + user);
-            document.location.href = "Second.aspx" + "?name=" + nameRep + "&user=" + user;
-        }
-    </script>
     <div class="dynamicData">
 
         <asp:Table ID="tableRepos" runat="server" Visible="false">
