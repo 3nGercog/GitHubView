@@ -1,18 +1,19 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/GitHubViewSite.Master" CodeBehind="Help.aspx.cs" Inherits="WebAppGitHubView.Help" %>
 
-<asp:Content ID="ContentHelpHeader" ContentPlaceHolderID="head" runat="server" ></asp:Content>
+<asp:Content ID="ContentHelpHeader" ContentPlaceHolderID="head" runat="server"></asp:Content>
 
-<asp:Content ID="ContentHelpBody" ContentPlaceHolderID="default" runat="server" >
+<asp:Content ID="ContentHelpBody" ContentPlaceHolderID="default" runat="server">
     <div class="help">
-        <h3 style="color:peru" >Как пользоваться списком и ресурсом</h3>
+        <h3 style="color: peru">Как пользоваться списком и ресурсом</h3>
         <div class="text">
             <p>
                 Данный ресурс представляет 2 варианта работы с репозиториями:<br />
                 1 Для просмотра всех репозиториев (public and private) но при условии проверки подлинности.<br />
                 2 Для просмотра public репозиториев из списка.
         <p>
-            Для 1 варианта работы необходимо в строке браузера ввести "localhost/githubview/Default.aspx" после чего загрузится страница 
-            где необходимо ввести логин пользователя github и пароль. Поле чего загрузиться страница со всеми репозиториями.
+            Для 1 варианта работы необходимо в строке браузера ввести "localhost/githubview/Default.aspx", где githubview - 
+            номер порта либо название фолдера, после чего загрузится страница где необходимо ввести логин пользователя
+            github и пароль. Поле чего загрузиться страница со всеми репозиториями.
         </p>
             <p>
                 Для второго варианта работы также в строке браузера вводим "localhost/githubview/List.aspx", после чего загрузиться 

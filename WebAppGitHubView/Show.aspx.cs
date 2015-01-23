@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 using Octokit;
 using System.Data.SqlClient;
+using System.Globalization;
 
 namespace WebAppGitHubView
 {
@@ -16,13 +16,13 @@ namespace WebAppGitHubView
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            int countUrl = Convert.ToInt32(Request.QueryString["cu"]);
+            //int countUrl = Convert.ToInt32(Request.QueryString["cu"], CultureInfo.InvariantCulture);
 
             using (GitHubUrlContext context = new GitHubUrlContext())
             {
                 using (SqlConnection conn = new SqlConnection(context.Database.Connection.ConnectionString))
                 {
-                    string query = String.Format("SELECT [URLS].[Url] FROM [URLS]");
+                    string query = String.Format(CultureInfo.InvariantCulture, "SELECT [URLS].[Url] FROM [URLS]");
                     SqlCommand com = new SqlCommand(query, conn);
                     conn.Open();
                     using (SqlDataReader reader = com.ExecuteReader())

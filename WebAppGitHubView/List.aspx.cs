@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Net.NetworkInformation;
+using System.Globalization;
 
 namespace WebAppGitHubView
 {
@@ -19,35 +20,34 @@ namespace WebAppGitHubView
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            dhuc = new GitHubUrlContext();
-            SelectedGridView(dhuc);
-            
-            message.Text = String.Empty;
-            if (!IsPostBack)
+            try
             {
-                this.tb_url.Value = String.Empty;
-                tb_url.Disabled = true;
-            }
+                dhuc = new GitHubUrlContext();
+                SelectGridView(dhuc);
             
+                message.Text = String.Empty;
+                if (!IsPostBack)
+                {
+                    this.tb_url.Value = String.Empty;
+                    tb_url.Disabled = true;
+                }
+            }
+            catch (InvalidOperationException ex)
+            {
+                this.message.Text = ex.Message;
+            }
         }
 
         void GridViewUrl_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            try
-            {
-                if (e.Row.RowType == DataControlRowType.DataRow)
-                { 
-                    e.Row.Attributes.Add("onclick", "cell_list_Click(this)");
-                    e.Row.Attributes.Add("class", "rowRepository");
-                }
-            }
-            catch (Exception ex)
-            {
-                message.Text = ex.Message;
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            { 
+                e.Row.Attributes.Add("onclick", "cell_list_Click(this)");
+                e.Row.CssClass = "rowRepository";
             }
         }
 
-        private void SelectedGridView(GitHubUrlContext gitHubUrlContext)
+        private void SelectGridView(GitHubUrlContext gitHubUrlContext)
         {
             try
             {
@@ -56,7 +56,7 @@ namespace WebAppGitHubView
                 GridViewUrl.DataSourceID = SqlDataSourceUrl.ID;
                 GridViewUrl.RowDataBound += GridViewUrl_RowDataBound;
             }
-            catch (Exception ex)
+            catch (InvalidOperationException ex)
             {
                 message.Text = ex.Message;
             }
@@ -92,12 +92,12 @@ namespace WebAppGitHubView
                             dhuc = new GitHubUrlContext();
                             using (SqlConnection conn = new SqlConnection(dhuc.Database.Connection.ConnectionString))
                             {
-                                string query = String.Format("INSERT INTO [URLS] VALUES ('{0}')", tb_url.Value);
+                                string query = String.Format(CultureInfo.InvariantCulture,"INSERT INTO [URLS] VALUES ('{0}')", tb_url.Value);
                                 SqlCommand com = new SqlCommand(query, conn);
                                 conn.Open();
                                 if (com.ExecuteNonQuery() == 1)
                                 {
-                                    SelectedGridView(dhuc);
+                                    SelectGridView(dhuc);
                                     DisabledTexBox();
                                     message.CssClass = "validation_success";
                                     message.Text = "add url github.com";
@@ -105,16 +105,15 @@ namespace WebAppGitHubView
                                 }
                             }
                         }
-                        catch (Exception ex)
+                        catch (InvalidOperationException ex)
                         {
                             DisabledTexBox();
                             message.CssClass = "validation_error";
                             message.Text = ex.Message;
                         }
-
                     }
                 }
-                catch (Exception expt)
+                catch (RegexMatchTimeoutException expt)
                 {
                     DisabledTexBox();
                     message.CssClass = "validation_error";
@@ -138,12 +137,12 @@ namespace WebAppGitHubView
                     dhuc = new GitHubUrlContext();
                     using (SqlConnection conn = new SqlConnection(dhuc.Database.Connection.ConnectionString))
                     {
-                        string query = String.Format("DELETE FROM [URLS] WHERE [URLS].[Id] = {0}", this.hdField.Value);
+                        string query = String.Format(CultureInfo.InvariantCulture,"DELETE FROM [URLS] WHERE [URLS].[Id] = {0}", this.hdField.Value);
                         SqlCommand com = new SqlCommand(query, conn);
                         conn.Open();
                         if (com.ExecuteNonQuery() == 1)
                         {
-                            SelectedGridView(dhuc);
+                            SelectGridView(dhuc);
                             DisabledTexBox();
                             message.CssClass = "validation_success";
                             message.Text = "removed url";
@@ -151,7 +150,7 @@ namespace WebAppGitHubView
                         }
                     }
                 }
-                catch (Exception ex)
+                catch (SqlException ex)
                 {
                     DisabledTexBox();
                     message.CssClass = "validation_error";
@@ -175,19 +174,19 @@ namespace WebAppGitHubView
                     dhuc = new GitHubUrlContext();
                     using (SqlConnection conn = new SqlConnection(dhuc.Database.Connection.ConnectionString))
                     {
-                        string query = String.Format("UPDATE [URLS] SET [Url] = '{0}' WHERE Id = {1};", this.tb_url.Value, this.hdField.Value);
+                        string query = String.Format(CultureInfo.InvariantCulture,"UPDATE [URLS] SET [Url] = '{0}' WHERE Id = {1};", this.tb_url.Value, this.hdField.Value);
                         SqlCommand com = new SqlCommand(query, conn);
                         conn.Open();
                         if (com.ExecuteNonQuery() == 1)
                         {
-                            SelectedGridView(dhuc);
+                            SelectGridView(dhuc);
                             DisabledTexBox();
                             message.CssClass = "validation_success";
                             message.Text = "edit url";
                         }
                     }
                 }
-                catch (Exception ex)
+                catch (SqlException ex)
                 {
                     DisabledTexBox();
                     message.CssClass = "validation_error";
@@ -200,11 +199,6 @@ namespace WebAppGitHubView
                 message.CssClass = "validation_error";
                 message.Text = "tex box disabled";
             }
-        }
-
-        protected void btHelp_Click(object sender, EventArgs e)
-        {
-
         }
 
         protected void btActivation_Click(object sender, EventArgs e)

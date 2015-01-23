@@ -9,6 +9,7 @@ using System.Web.UI.WebControls;
 using Octokit;
 using System.Runtime.InteropServices;
 using System.Net.NetworkInformation;
+using System.Globalization;
 
 namespace WebAppGitHubView
 {
@@ -36,24 +37,6 @@ namespace WebAppGitHubView
                 Ping p = new Ping();
                 PingReply pr = p.Send(@"github.com");
                 status = pr.Status;
-            }
-        }
-
-        private void DisplayControl(ControlCollection controls, int depth)
-        {
-            foreach (Control control in controls)
-            {
-                // Количество отступов в представлении дерева элементов управления
-                Response.Write(new String('-', depth * 4) + "> ");
-
-                // Отобразить элемент управления
-                Response.Write(control.GetType().ToString() + " - <b>" +
-                  control.ID + "</b><br />");
-
-                if (control.Controls != null)
-                {
-                    DisplayControl(control.Controls, depth + 1);
-                }
             }
         }
 
@@ -106,7 +89,7 @@ namespace WebAppGitHubView
                             dt.Columns.Add(col2);
                             DataRow dRow = null;
 
-                            for (int first = 0; first < info.FirstColum.Length; first++)
+                            for (int first = 0; first < info.FirstColum.Count; first++)
                             {
                                 if (first == 0)
                                 {//repository = info.SecondColum[first];
@@ -132,10 +115,10 @@ namespace WebAppGitHubView
                         tableRepos.Rows.Add(row);
                     }
                 }
-                catch (Exception ex)
+                catch (ArgumentException ex)
                 {
                     Response.Write(ex.Message + ". Если по каким то причинам не помните свой пароль" +
-                        " можно посмотреть все репозитории в <a href=\"localhost/githubview/List.aspx\">списке.</a>списке");
+                        " можно посмотреть все репозитории в <a href=\"http://localhost:52909/List.aspx \">списке.</a>");
                 }
               
             }
@@ -158,7 +141,7 @@ namespace WebAppGitHubView
                 TableCell tableCell = new TableCell();
 
                 tableCell.Attributes["ColSpan"] =
-                    grid.Columns.Count.ToString();
+                    grid.Columns.Count.ToString(CultureInfo.InvariantCulture);
 
                 tableCell.BackColor = System.Drawing.Color.Chocolate;
                 
@@ -183,7 +166,7 @@ namespace WebAppGitHubView
                 if (i == cell)
                 {
                     description = repositorys[i].Description;
-                    if (description == "")
+                    if (String.IsNullOrEmpty(description))
                         description = "No description!";
                     info = new RepositorysInfo(repositorys[i].Name, repositorys[i].FullName, description, 
                         repositorys[i].HtmlUrl, repositorys[i].Id, repositorys[i].CreatedAt.DateTime);
