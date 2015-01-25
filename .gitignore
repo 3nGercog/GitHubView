@@ -46,7 +46,8 @@ build/
 *.log
 *.scc
 *.config
-*.mdf
+*.aspx.designer.cs
+
 
 # Visual C++ cache files
 ipch/

@@ -120,7 +120,7 @@ namespace WebAppGitHubView
                         comList.BulletStyle = BulletStyle.NotSet;
                         comList.DisplayMode = BulletedListDisplayMode.Text;
 
-                        autor = new ListItem("Autor = " + listCommit[c].Commit.Author.Name);
+                        autor = new ListItem("Author = " + listCommit[c].Commit.Author.Name);
                         comList.Items.Add(autor);
                         date = new ListItem("Date = " + listCommit[c].Commit.Author.Date);
                         comList.Items.Add(date);
